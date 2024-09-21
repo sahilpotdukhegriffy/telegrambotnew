@@ -1,6 +1,7 @@
 import TelegramAuth from "@/components/TelegramAuth";
 import { getSession } from "@/utils/session";
 import WebApp from "@twa-dev/sdk";
+import { useEffect, useState } from "react";
 
 interface UserData {
   id: number;
@@ -12,17 +13,12 @@ interface UserData {
 }
 export default async function Home() {
   const session = await getSession();
-  const [userData, setUserData] = useState<UserData | null>(null);
 
-  useEffect(() => {
-    if (WebApp.initDataUnsafe.user) {
-      setUserData(WebApp.initDataUnsafe.user as UserData);
-    }
-  }, []);
+  console.log(session);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      {userData ? (
+      {/* {userData ? (
         <>
           <h1 className="text-2xl font-bold mb-4">User Data</h1>
           <ul>
@@ -36,7 +32,7 @@ export default async function Home() {
         </>
       ) : (
         <div>Loading...</div>
-      )}
+      )} */}
       <h1 className="text-4xl font-bold mb-8">
         Jwt Authentication for Telegram Mini Apps
       </h1>
@@ -44,11 +40,4 @@ export default async function Home() {
       <TelegramAuth />
     </main>
   );
-}
-function useState<T>(arg0: null): [any, any] {
-  throw new Error("Function not implemented.");
-}
-
-function useEffect(arg0: () => void, arg1: never[]) {
-  throw new Error("Function not implemented.");
 }
