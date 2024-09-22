@@ -14,7 +14,7 @@ export default function RootLayout({
         <title>TON Connect Demo</title>
       </head>
       <body>
-        <TonConnectUIProvider manifestUrl="https://github.com/sahilpotdukhegriffy/telegrambotnew/blob/main/manifest-example.json">
+        <TonConnectUIProvider manifestUrl="https://white-acute-guineafowl-172.mypinata.cloud/ipfs/Qmc6Ez91xbQPqkdVCK5GNRP14A28himUPLVJ7dZU5Jsu1B">
           {children}
         </TonConnectUIProvider>
       </body>
