@@ -1,20 +1,8 @@
 import TelegramAuth from "@/components/TelegramAuth";
 import { getSession } from "@/utils/session";
-import WebApp from "@twa-dev/sdk";
-import { useEffect, useState } from "react";
 
-interface UserData {
-  id: number;
-  first_name: string;
-  last_name?: string;
-  username?: string;
-  language_code: string;
-  is_premium?: boolean;
-}
 export default async function Home() {
   const session = await getSession();
-
-  console.log(session);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-24">
