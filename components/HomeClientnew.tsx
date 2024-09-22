@@ -18,18 +18,34 @@ export default function HomeClient({ session }: { session: string | null }) {
   const [tonWalletAddress, setTonWalletAddress] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  /**
+   * handleWalletConnection:
+   * This function is called when a TON wallet is successfully connected.
+   * It updates the state with the wallet address and stops the loading state.
+   *
+   * @param {string} address - The address of the connected wallet.
+   */
   const handleWalletConnection = useCallback((address: string) => {
     setTonWalletAddress(address);
     console.log("Wallet connected successfully!");
     setIsLoading(false);
   }, []);
 
+  /**
+   * handleWalletDisconnection:
+   * This function is called when the TON wallet is disconnected.
+   * It clears the wallet address state and stops the loading state.
+   */
   const handleWalletDisconnection = useCallback(() => {
     setTonWalletAddress(null);
     console.log("Wallet disconnected successfully!");
     setIsLoading(false);
   }, []);
 
+  /**
+   * This hook is responsible for checking the current wallet connection status on mount and subscribing to changes in the wallet status.
+   * It automatically connects or disconnects the wallet based on the connection state.
+   */
   useEffect(() => {
     const checkWalletConnection = async () => {
       if (tonConnectUI.account?.address) {
@@ -54,6 +70,11 @@ export default function HomeClient({ session }: { session: string | null }) {
     };
   }, [tonConnectUI, handleWalletConnection, handleWalletDisconnection]);
 
+  /**
+   * handleWalletAction:
+   * This function handles the user action to connect or disconnect the TON wallet.
+   * It toggles between connecting and disconnecting based on the current connection state.
+   */
   const handleWalletAction = async () => {
     if (tonConnectUI.connected) {
       setIsLoading(true);
@@ -79,13 +100,13 @@ export default function HomeClient({ session }: { session: string | null }) {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
+    <main className="flex min-h-screen flex-col items-center justify-center p-14">
       <h1 className="text-4xl font-bold mb-8">
-        Jwt Authentication for Telegram Mini Apps
+        Sign in with Telegram using JWT
       </h1>
       <pre>{JSON.stringify(session, null, 2)}</pre> {/* Render session data */}
       <TelegramAuth />
-      <h1 className="text-4xl font-bold mb-8">TON Connect Demo</h1>
+      <h2 className="text-4xl font-bold mb-8">Connect to TON wallet</h2>
       {tonWalletAddress ? (
         <div className="flex flex-col items-center">
           <p className="mb-4">Connected: {formatAddress(tonWalletAddress)}</p>
